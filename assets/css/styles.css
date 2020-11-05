@@ -1,0 +1,10 @@
+.navbar {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+/* Login */
+.credentialcontainer {
+  margin: 0 auto;
+  width: 500px;
+}

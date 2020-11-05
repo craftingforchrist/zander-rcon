@@ -1,0 +1,125 @@
+<%- include("../partials/header.ejs") %>
+<%- include("../partials/navigation.ejs") %>
+
+<div class="container">
+  <div class="jumbotron">
+    <div class="container">
+      <h1 class="display-3">Administration</h1>
+      <p>Welcome to the land of Remote Minecraft Server Administration.</p>
+    </div>
+  </div>
+
+  <% if (successalert == true) { %>
+    <%- include("../partials/micros/successmsg.ejs") %>
+  <% } %>
+
+  <div class="row">
+    <!-- Online Players -->
+    <div class="col-sm">
+      <h3>Players</h3>
+      <%= playersonline %>
+      <hr>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Username</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>shadowolfyt</td>
+            <td>
+              <div class="btn-group" role="group">
+                <form method="post" action="/rcon/kill">
+                  <button type="submit" class="btn btn-danger"><i class="fas fa-skull"></i></button>
+                </form>
+                <form method="post" action="/rcon/clear">
+                  <button type="submit" class="btn btn-warning"><i class="fas fa-broom"></i></button>
+                </form>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <hr>
+
+      <div>
+        <h5>Legend</h5>
+        <table class="table">
+          <tr>
+            <td><button type="disabled" class="btn btn-danger"><i class="fas fa-skull"></i></button></td>
+            <td>Kill Player</td>
+          </tr>
+          <tr>
+            <td><button type="disabled" class="btn btn-warning"><i class="fas fa-broom"></i></button></td>
+            <td>Clear Inventory</td>
+          </tr>
+        </table>
+      </div>
+      <hr>
+    </div>
+
+    <!-- Punishment -->
+    <div class="col-sm">
+      <h3>Punishment</h3>
+      <form method="post" action="/rcon/punish">
+        <div class="form-group">
+          <label for="punishmentusername">Username</label>
+          <input type="text" class="form-control" name="punishmentusername" maxlength="16" required>
+        </div>
+        <div class="form-group">
+          <label for="punishmenttype">Type of Punishment</label>
+          <select class="form-control" name="punishmenttype" required>
+            <option disabled selected>Select</option>
+            <option value="warn">Warn</option>
+            <option value="kick">Kick</option>
+            <option value="ban">Ban</option>
+            <option value="ban-ip" disabled>Ban Player and IP Address</option>
+            <option value="pardon">Pardon</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="punishmentreason">Reason</label>
+          <textarea class="form-control" name="punishmentreason" rows="2"></textarea>
+        </div>
+        <button type="submit" class="btn btn-warning">Punish</button>
+      </form>
+      <hr>
+    </div>
+
+    <!-- Broadcast -->
+    <div class="col-sm">
+      <h3>Broadcast</h3>
+      <form method="post" action="/rcon/broadcast">
+        <div class="form-group">
+          <label for="broadcastmessage">Message</label>
+          <input class="form-control" name="broadcastmessage" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-sm">Broadcast</button>
+      </form>
+      <hr>
+
+      <!-- Time -->
+      <h3>Time</h3>
+      <div class="btn-group" role="group">
+        <form method="post" action="/rcon/time/day">
+          <button type="submit" class="btn btn-secondary">Day</button>
+        </form>
+        <form method="post" action="/rcon/time/midnight">
+          <button type="submit" class="btn btn-secondary">Midnight</button>
+        </form>
+        <form method="post" action="/rcon/time/night">
+          <button type="submit" class="btn btn-secondary">Night</button>
+        </form>
+        <form method="post" action="/rcon/time/noon">
+          <button type="submit" class="btn btn-secondary">Noon</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <hr>
+</div>
+
+<%- include("../partials/footer.ejs") %>

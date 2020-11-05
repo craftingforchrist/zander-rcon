@@ -1,0 +1,34 @@
+<%- include("../partials/header.ejs") %>
+<%- include("../partials/navigation.ejs") %>
+
+<div class="container">
+  <div class="jumbotron">
+    <div class="container">
+      <h1 class="display-3">Login</h1>
+      <p>To view the Administration Panel, you are required to Login!</p>
+    </div>
+  </div>
+
+  <form class="credentialcontainer" method="post" action="/login">
+    <% if (loginfailed == true) { %>
+      <div class="alert alert-danger" role="alert">
+        <small>That was not the right username or password. Please try again!</small>
+      </div>
+    <% } %>
+
+    <div class="form-label-group">
+      <input type="text" name="username" class="form-control" required autofocus>
+      <label for="username"><small>Username</small></label>
+    </div>
+
+    <div class="form-label-group">
+      <input type="password" name="password" class="form-control" required autofocus>
+      <label for="password"><small>Password</small></label>
+    </div>
+
+    <br>
+    <button class="btn btn-lg btn-primary btn-block btn-secondary" type="submit">Login</button>
+  </form>
+</div>
+
+<%- include("../partials/footer.ejs") %>
