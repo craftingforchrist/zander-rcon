@@ -1,0 +1,41 @@
+<%- include("../../partials/header.ejs") %>
+<%- include("../../partials/navigation.ejs") %>
+
+<div class="container">
+  <div class="jumbotron">
+    <div class="container">
+      <h1 class="display-3">Accounts</h1>
+      <p>Create an account</p>
+    </div>
+  </div>
+
+  <% if (successalert == true) { %>
+    <%- include("../../partials/micros/successmsg.ejs") %>
+  <% } %>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Username</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Mark</td>
+        <td>Otto</td>
+      </tr>
+      <tr>
+        <td>Jacob</td>
+        <td>Thornton</td>
+      </tr>
+      <tr>
+        <td>Larry</td>
+        <td>the Bird</td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>
+</div>
+
+<%- include("../../partials/footer.ejs") %>

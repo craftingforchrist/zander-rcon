@@ -18,7 +18,7 @@ router.post('/login', function (req, res, next) {
   if (username == process.env.adminusername && password == process.env.adminpassword) {
     console.log(`[CONSOLE] [ADMIN] ${process.env.adminusername} has logged in.`);
     req.session.user = process.env.adminusername;
-    res.redirect("/admin");
+    res.redirect("/panel");
   } else {
     console.log('An action in RCON was attempted but the user was not logged in.');
     res.render('session/login', {

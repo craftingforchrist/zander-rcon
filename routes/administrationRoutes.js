@@ -6,7 +6,7 @@ const rcon = require('../controllers/rconController');
 //
 // Main Administration Page.
 //
-router.get('/admin', (req, res, next) => {
+router.get('/panel', (req, res, next) => {
   if (!req.session.user) {
     res.render('session/login', {
       "pagetitle": "Login",
@@ -15,8 +15,8 @@ router.get('/admin', (req, res, next) => {
     });
   } else {
     rcon.send(`list`).then(result => {
-      res.render('session/admin', {
-        "pagetitle": "Administration",
+      res.render('session/panel', {
+        "pagetitle": "Administration Panel",
         "pagedescription": "The main control room for the remote Minecraft instance.",
         "playersonline": result
       });

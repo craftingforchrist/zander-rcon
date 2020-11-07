@@ -18,7 +18,7 @@ const rcon = require('../controllers/rconController');
 //     const username = req.body.username;
 //
 //     rcon.send(`op ${username}`);
-//     res.redirect('/admin');
+//     res.redirect('/panel');
 //   };
 // });
 //
@@ -34,7 +34,7 @@ const rcon = require('../controllers/rconController');
 //     const username = req.body.username;
 //
 //     rcon.send(`deop ${username}`);
-//     res.redirect('/admin');
+//     res.redirect('/panel');
 //   };
 // });
 
@@ -53,7 +53,7 @@ router.post('/rcon/broadcast', function (req, res, next) {
     const broadcastmessage = req.body.broadcastmessage;
 
     rcon.send(`say ${broadcastmessage}`);
-    res.redirect('/admin');
+    res.redirect('/panel');
   };
 });
 
@@ -71,7 +71,7 @@ router.post('/rcon/time/day', function (req, res, next) {
   } else {
     rcon.send(`time set day`).then(result => {
       console.log(result)
-      res.redirect('/admin');
+      res.redirect('/panel');
     });
   };
 });
@@ -87,7 +87,7 @@ router.post('/rcon/time/midnight', function (req, res, next) {
   } else {
     rcon.send(`time set midnight`).then(result => {
       console.log(result)
-      res.redirect('/admin');
+      res.redirect('/panel');
     });
   };
 });
@@ -103,7 +103,7 @@ router.post('/rcon/time/night', function (req, res, next) {
   } else {
     rcon.send(`time set night`).then(result => {
       console.log(result)
-      res.redirect('/admin');
+      res.redirect('/panel');
     });
   };
 });
@@ -119,7 +119,7 @@ router.post('/rcon/time/noon', function (req, res, next) {
   } else {
     rcon.send(`time set noon`).then(result => {
       console.log(result)
-      res.redirect('/admin');
+      res.redirect('/panel');
     });
   };
 });
@@ -145,17 +145,17 @@ router.post('/rcon/punish', function (req, res, next) {
     if (type == 'warn') {
       rcon.send(`msg ${username} You have been warned for the following reason: ${reason}!`).then(result => {
         console.log(result)
-        res.redirect('/admin');
+        res.redirect('/panel');
       });
     } else if (type == 'pardon') {
       rcon.send(`${type} ${username}`).then(result => {
         console.log(result)
-        res.redirect('/admin');
+        res.redirect('/panel');
       });
     } else {
       rcon.send(`${type} ${username} ${reason}`).then(result => {
         console.log(result)
-        res.redirect('/admin');
+        res.redirect('/panel');
       });
     }
   };

@@ -18,6 +18,7 @@ const config = require('./config.json');
 // Controllers
 //
 const rcon = require('./controllers/rconController');
+const database = require('./controllers/databaseController');
 
 //
 // Constants
@@ -67,6 +68,9 @@ app.use(sessionRoutes);
 
 var administrationRoutes = require('./routes/administrationRoutes');
 app.use(administrationRoutes);
+
+var accountsRoutes = require('./routes/accountsRoutes');
+app.use(accountsRoutes);
 
 var rconRoutes = require('./routes/rconRoutes');
 app.use(rconRoutes);
