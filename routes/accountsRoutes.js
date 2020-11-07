@@ -24,11 +24,13 @@ module.exports = (client) => {
         if (error) {
           throw error;
         } else {
+          console.log(results);
+
           res.render('session/accounts/list', {
             "pagetitle": "Accounts",
             "pagedescription": "List of all Accounts.",
-            objdata: results[0],
-            accountpermissiondata: results[1]
+            objdata: results,
+            accountspermissions: results[1][0]
           });
         };
       });
@@ -46,10 +48,7 @@ module.exports = (client) => {
         "loginfailed": false
       });
     } else {
-      console.log(req.body);
-
       let id = req.body.id;
-
       let sql = `DELETE FROM accountdata WHERE id=?;`
       database.query (sql, [`${req.body.id}`], async function (err, results) {
         console.log(results);

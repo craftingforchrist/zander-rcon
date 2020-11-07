@@ -19,6 +19,7 @@ CREATE TABLE accountdata (
 );
 
 INSERT INTO accountdata (username, password) VALUES ('CONSOLE', 'password');
+INSERT INTO accountspermissions (accountid, accountcreate, accountdelete, accountdisable, accountedit, punishmentwarn, punishmentkick, punishmentban, punishmentbanip, punishmentpardon, serverbroadcast, servertime, servergamerule, servercommand) VALUES ((SELECT id FROM accountdata WHERE username='CONSOLE'), "GRANT", "GRANT", "GRANT", "GRANT", "GRANT", "GRANT", "GRANT", "GRANT", "GRANT", "GRANT", "GRANT", "GRANT", "GRANT");
 
 CREATE TABLE accountspermissions (
   id int AUTO_INCREMENT PRIMARY KEY NOT NULL,

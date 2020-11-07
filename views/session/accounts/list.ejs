@@ -34,8 +34,8 @@
     <%- include("../../partials/micros/errormsg.ejs") %>
   <% } %>
 
-  <% if (accountpermissiondata.accountcreate == 'GRANT') { %>
-    <div class="">
+  <% if (accountspermissions.accountcreate == 'GRANT') { %>
+    <div>
       <a href="/panel/accounts/add"><button type="submit" class="btn btn-success">Create Account</button></a>
     </div>
   <% } %>
@@ -50,7 +50,7 @@
       </tr>
     </thead>
     <tbody>
-      <% objdata.forEach(function (data) { %>
+      <% objdata[0].forEach(function (data) { %>
         <tr>
           <td><%= data.username %></td>
           <!-- <td>
@@ -62,16 +62,18 @@
             </div>
           </td> -->
           <td style="max-width:10px;">
-            <% if (accountpermissiondata.accountedit == 'GRANT') { %>
             <div class="btn-group" role="group" aria-label="accountactiongroup">
+              <!-- 
+              <% if (accountspermissions.accountedit == 'GRANT') { %>
                 <form action="/panel/accounts/edit" method="post">
-                  <input type="hidden" name="id" value="<%= data.id %>">
+                  <input type="hidden" name="id" value="<%= objdata[0].id %>">
                   <button type="submit" class="btn btn-warning btn-sm">Edit</button>
                 </form>
               <% } %>
-              <% if (accountpermissiondata.accountdelete == 'GRANT') { %>
+               -->
+              <% if (accountspermissions.accountdelete == 'GRANT') { %>
                 <form action="/panel/accounts/delete" method="post">
-                  <input type="hidden" name="id" value="<%= data.id %>">
+                  <input type="hidden" name="id" value="<%= objdata[0].id %>">
                   <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                 </form>
               <% } %>
