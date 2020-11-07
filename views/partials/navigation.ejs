@@ -11,9 +11,6 @@
           <li class="nav-item">
             <a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/login"><i class="fas fa-sign-in-alt"></i> Login</a>
-          </li>
 
           <% if (sessionUser) { %>
             <li class="nav-item dropdown">
@@ -21,11 +18,26 @@
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="/panel"><i class="fas fa-users-cog"></i> Dashboard</a>
                 <a class="dropdown-item" href="/panel/accounts"><i class="fas fa-users"></i> Accounts</a>
-                <a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
               </div>
             </li>
           <% } %>
+
+          <% if (sessionUser) { %>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </li>
+          <% } else { %>
+          <li class="nav-item">
+            <a class="nav-link" href="/login"><i class="fas fa-sign-in-alt"></i> Login</a>
+          </li>
+          <% } %>
         </ul>
     </div>
+
+    <% if (sessionUser) { %>
+      <div class="nav-item">
+        <a style="color:rgba(255,255,255,.5)">Welcome <%= sessionUser %></a>
+      </div>
+    <% } %>
   </div>
 </nav>

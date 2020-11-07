@@ -13,29 +13,29 @@
     <%- include("../../partials/micros/successmsg.ejs") %>
   <% } %>
 
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Username</th>
-        <th scope="col">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Mark</td>
-        <td>Otto</td>
-      </tr>
-      <tr>
-        <td>Jacob</td>
-        <td>Thornton</td>
-      </tr>
-      <tr>
-        <td>Larry</td>
-        <td>the Bird</td>
-      </tr>
-    </tbody>
-  </table>
-  <hr>
+  <form action="/panel/accounts/create" method="post">
+    <h1>Basics</h1>
+    <hr>
+    <div class="form-row">
+      <div class="col">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" name="username" aria-describedby="usernamehelp" required>
+        <small class="form-text text-muted">The players in game name.</small>
+      </div>
+      <div class="col">
+        <label for="discordid">Discord ID</label>
+        <input type="text" class="form-control" name="discordid" aria-describedby="discordidhelp" required>
+        <small class="form-text text-muted">This is used to send the panel password to the user.</small>
+      </div>
+    </div>
+    <br><br>
+
+    <h1>Permissions</h1>
+    <hr>
+    <%- include("../../partials/permissions.ejs") %>
+
+    <button type="submit" class="btn btn-success">Create Account</button>
+  </form>
 </div>
 
 <%- include("../../partials/footer.ejs") %>

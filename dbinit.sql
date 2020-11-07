@@ -15,19 +15,27 @@ CREATE TABLE accountdata (
   username VARCHAR(16),
   password TEXT,
   discordid VARCHAR(18),
-  status ENUM('ACTIVE', 'DISABLED')
+  status ENUM('ACTIVE', 'DISABLED') DEFAULT 'ACTIVE'
 );
+
+INSERT INTO accountdata (username, password) VALUES ('CONSOLE', 'password');
 
 CREATE TABLE accountspermissions (
   id int AUTO_INCREMENT PRIMARY KEY NOT NULL,
   accountid INT NOT NULL DEFAULT 0,
-  punishmentwarn BOOLEAN DEFAULT 0,
-  punishmentkick BOOLEAN DEFAULT 0,
-  punishmentban BOOLEAN DEFAULT 0,
-  punishmentbanip BOOLEAN DEFAULT 0,
-  punishmentbanpardon BOOLEAN DEFAULT 0,
-  serverbroadcast BOOLEAN DEFAULT 0,
-  servertime BOOLEAN DEFAULT 0,
+  accountcreate ENUM('on', 'off') DEFAULT 'off',
+  accountdelete ENUM('on', 'off') DEFAULT 'off',
+  accountdisable ENUM('on', 'off') DEFAULT 'off',
+  accountedit ENUM('on', 'off') DEFAULT 'off',
+  punishmentwarn ENUM('on', 'off') DEFAULT 'off',
+  punishmentkick ENUM('on', 'off') DEFAULT 'off',
+  punishmentban ENUM('on', 'off') DEFAULT 'off',
+  punishmentbanip ENUM('on', 'off') DEFAULT 'off',
+  punishmentpardon ENUM('on', 'off') DEFAULT 'off',
+  serverbroadcast ENUM('on', 'off') DEFAULT 'off',
+  servertime ENUM('on', 'off') DEFAULT 'off',
+  servergamerule ENUM('on', 'off') DEFAULT 'off',
+  servercommand ENUM('on', 'off') DEFAULT 'off',
   FOREIGN KEY (accountid) REFERENCES accountdata (id)
 );
 

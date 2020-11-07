@@ -7,6 +7,9 @@ require ('dotenv').config();
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
 const cookieParser = require('cookie-parser');
+const Discord = require('discord.js');
+const client = new Discord.Client({ disableEveryone: true });
+
 
 //
 // File Constants
@@ -69,7 +72,7 @@ app.use(sessionRoutes);
 var administrationRoutes = require('./routes/administrationRoutes');
 app.use(administrationRoutes);
 
-var accountsRoutes = require('./routes/accountsRoutes');
+var accountsRoutes = require('./routes/accountsRoutes')(client);
 app.use(accountsRoutes);
 
 var rconRoutes = require('./routes/rconRoutes');
@@ -82,4 +85,10 @@ const port = process.env.PORT || 8080;
 app.listen(port, function() {
   console.log(`\n// ${package.name} v.${package.version}\nGitHub Repository: ${package.homepage}\nCreated By: ${package.author}`);
   console.log(`[CONSOLE] Application is listening to the port ${port}`);
+
+  client.login(process.env.discordapitoken);
+
+  client.on("ready", () => {
+    console.log('[CONSOLE] [DISCORD] Launched Discord web side.');
+  });
 });

@@ -2,6 +2,7 @@ const { Router } = require('express');
 const router = Router();
 const config = require('../config.json');
 const rcon = require('../controllers/rconController');
+const database = require('../controllers/databaseController');
 
 router.get('/login', (req, res, next) => {
   res.render('session/login', {
@@ -12,26 +13,32 @@ router.get('/login', (req, res, next) => {
 });
 
 router.post('/login', function (req, res, next) {
-  const username = req.body.username;
-  const password = req.body.password;
+  database.query(`SELECT username, password FROM accountdata where username=?;`, [req.body.username], function (error, results, fields) {
+      if (error) {
+        throw error;
 
-  if (username == process.env.adminusername && password == process.env.adminpassword) {
-    console.log(`[CONSOLE] [ADMIN] ${process.env.adminusername} has logged in.`);
-    req.session.user = process.env.adminusername;
-    res.redirect("/panel");
-  } else {
-    console.log('An action in RCON was attempted but the user was not logged in.');
-    res.render('session/login', {
-      "pagetitle": "Login",
-      "pagedescription": "To be able to have full functionality, please login.",
-      "loginfailed": true
-    });
-  };
+        console.log('this did not work');
+      } else {
+        if (results.length < 1) {
+          res.render('session/login', {
+            "pagetitle": "Login",
+            "pagedescription": "To be able to have full functionality, please login.",
+            "loginfailed": true
+          });
+        } else {
+          if (req.body.username == results[0].username && req.body.password == results[0].password) {
+            console.log(`[CONSOLE] [ADMIN] ${req.body.username} has logged in.`);
+            req.session.user = req.body.username;
+            res.redirect("/panel");
+          }
+        }
+    };
+  });
 });
 
 router.get('/logout', function (req, res) {
   req.session.destroy(function() {
-      console.log(`[CONSOLE] [ADMIN] ${process.env.adminusername} has logged out.`);
+      console.log(`[CONSOLE] [ADMIN] ${req.body.username} has logged out.`);
    });
    res.redirect('/');
 });

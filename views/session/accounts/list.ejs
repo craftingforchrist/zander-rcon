@@ -1,6 +1,23 @@
 <%- include("../../partials/header.ejs") %>
 <%- include("../../partials/navigation.ejs") %>
 
+<script>
+  $(document).ready(function() {
+    $("#show_hide_password a").on('click', function(event) {
+        event.preventDefault();
+        if($('#show_hide_password input').attr("type") == "text"){
+            $('#show_hide_password input').attr('type', 'password');
+            $('#show_hide_password i').addClass( "fa-eye-slash" );
+            $('#show_hide_password i').removeClass( "fa-eye" );
+        }else if($('#show_hide_password input').attr("type") == "password"){
+            $('#show_hide_password input').attr('type', 'text');
+            $('#show_hide_password i').removeClass( "fa-eye-slash" );
+            $('#show_hide_password i').addClass( "fa-eye" );
+        }
+    });
+  });
+</script>
+
 <div class="container">
   <div class="jumbotron">
     <div class="container">
@@ -13,10 +30,12 @@
     <%- include("../../partials/micros/successmsg.ejs") %>
   <% } %>
 
+  <% if (erroralert == true) { %>
+    <%- include("../../partials/micros/errormsg.ejs") %>
+  <% } %>
+
   <div class="">
-    <form action="/panel/accounts/create" method="post">
-      <button type="submit" class="btn btn-success">Create Account</button>
-    </form>
+    <a href="/panel/accounts/add"><button type="submit" class="btn btn-success">Create Account</button></a>
   </div>
   <br>
 
@@ -24,22 +43,37 @@
     <thead>
       <tr>
         <th scope="col">Username</th>
+        <!-- <th scope="col"></th> -->
         <th scope="col">Action</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>Mark</td>
-        <td>Otto</td>
-      </tr>
-      <tr>
-        <td>Jacob</td>
-        <td>Thornton</td>
-      </tr>
-      <tr>
-        <td>Larry</td>
-        <td>the Bird</td>
-      </tr>
+      <% objdata.forEach(function (data) { %>
+        <tr>
+          <td><%= data.username %></td>
+          <!-- <td>
+            <div class="input-group" id="show_hide_password">
+              <input class="form-control" type="password" value="<%= data.password %>">
+              <div class="input-group-addon">
+                  <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+              </div>
+            </div>
+          </td> -->
+          <td style="max-width:10px;">
+            <div class="btn-group" role="group" aria-label="accountactiongroup">
+              <!-- <form action="/panel/accounts/edit" method="post">
+                <input type="hidden" name="action" value="edit">
+                <input type="hidden" name="id" value="<%= data.id %>">
+                <button type="submit" class="btn btn-warning btn-sm">Edit</button>
+              </form> -->
+              <form action="/panel/accounts/delete" method="post">
+                <input type="hidden" name="id" value="<%= data.id %>">
+                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+      <% }) %>
     </tbody>
   </table>
   <hr>
