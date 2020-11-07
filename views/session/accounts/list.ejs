@@ -63,17 +63,17 @@
           </td> -->
           <td style="max-width:10px;">
             <div class="btn-group" role="group" aria-label="accountactiongroup">
-              <!-- 
+              <!--
               <% if (accountspermissions.accountedit == 'GRANT') { %>
                 <form action="/panel/accounts/edit" method="post">
-                  <input type="hidden" name="id" value="<%= objdata[0].id %>">
+                  <input type="hidden" name="id" value="<%= data.id %>">
                   <button type="submit" class="btn btn-warning btn-sm">Edit</button>
                 </form>
               <% } %>
                -->
               <% if (accountspermissions.accountdelete == 'GRANT') { %>
                 <form action="/panel/accounts/delete" method="post">
-                  <input type="hidden" name="id" value="<%= objdata[0].id %>">
+                  <input type="hidden" name="id" value="<%= data.id %>">
                   <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                 </form>
               <% } %>

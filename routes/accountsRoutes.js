@@ -24,8 +24,6 @@ module.exports = (client) => {
         if (error) {
           throw error;
         } else {
-          console.log(results);
-
           res.render('session/accounts/list', {
             "pagetitle": "Accounts",
             "pagedescription": "List of all Accounts.",
@@ -48,11 +46,11 @@ module.exports = (client) => {
         "loginfailed": false
       });
     } else {
-      let id = req.body.id;
-      let sql = `DELETE FROM accountdata WHERE id=?;`
-      database.query (sql, [`${req.body.id}`], async function (err, results) {
+      // TODO: Cannot remove accounts due to a forign key constraint.
+      database.query (`DELETE FROM accountdata WHERE id=?; DELETE FROM accountspermissions WHERE accountid=?;`, [req.body.id, req.body.id], async function (err, results) {
         console.log(results);
-        res.redirect('/panel/accounts')
+        console.log(err);
+        res.redirect('/panel/accounts');
       });
     }
   });

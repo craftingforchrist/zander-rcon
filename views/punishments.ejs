@@ -1,0 +1,39 @@
+<%- include("./partials/header.ejs") %>
+<%- include("./partials/navigation.ejs") %>
+
+<div class="container">
+  <div class="jumbotron">
+    <div class="container">
+      <h1 class="display-3">Punishments</h1>
+      <p>A list of the fallen.</p>
+    </div>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Punished</th>
+        <th scope="col">Punisher</th>
+        <th scope="col">Type</th>
+        <th scope="col">Reason</th>
+        <th scope="col">Timestamp</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% objdata.forEach(function (data) { %>
+        <tr>
+          <td><%= data.id %></td>
+          <td><%= data.punisheduser %></td>
+          <td><%= data.punisher %></td>
+          <td><%= data.punishtype %></td>
+          <td><%= data.reason %></td>
+          <td><%= data.punishtimestamp %></td>
+        </tr>
+      <% }) %>
+
+    </tbody>
+  </table>
+</div>
+
+<%- include("./partials/footer.ejs") %>

@@ -2,41 +2,7 @@ const { Router } = require('express');
 const router = Router();
 const config = require('../config.json');
 const rcon = require('../controllers/rconController');
-
-//
-// OP
-//
-// router.post('/rcon/op/add', function (req, res, next) {
-//   if (!req.session.user) {
-//     console.log('An action in RCON was attempted but the user was not logged in.');
-//     res.render('session/login', {
-//       "pagetitle": "Login",
-//       "pagedescription": "To be able to have full functionality, please login.",
-//       "loginfailed": true
-//     });
-//   } else {
-//     const username = req.body.username;
-//
-//     rcon.send(`op ${username}`);
-//     res.redirect('/panel');
-//   };
-// });
-//
-// router.post('/rcon/op/remove', function (req, res, next) {
-//   if (!req.session.user) {
-//     console.log('An action in RCON was attempted but the user was not logged in.');
-//     res.render('session/login', {
-//       "pagetitle": "Login",
-//       "pagedescription": "To be able to have full functionality, please login.",
-//       "loginfailed": true
-//     });
-//   } else {
-//     const username = req.body.username;
-//
-//     rcon.send(`deop ${username}`);
-//     res.redirect('/panel');
-//   };
-// });
+const database = require('../controllers/databaseController');
 
 //
 // Broadcast
@@ -144,18 +110,39 @@ router.post('/rcon/punish', function (req, res, next) {
 
     if (type == 'warn') {
       rcon.send(`msg ${username} You have been warned for the following reason: ${reason}!`).then(result => {
-        console.log(result)
-        res.redirect('/panel');
+        console.log(result);
+
+        database.query(`INSERT INTO punishments (punisheduser, punisher, punishtype, reason) VALUES (?, ?, ?, ?);`, [username, req.session.user, type.toUpperCase(), reason], function (error, results, fields) {
+            if (error) {
+              throw error;
+            } else {
+              res.redirect('/panel');
+            };
+        });
       });
     } else if (type == 'pardon') {
       rcon.send(`${type} ${username}`).then(result => {
-        console.log(result)
-        res.redirect('/panel');
+        console.log(result);
+
+        database.query(`INSERT INTO punishments (punisheduser, punisher, punishtype, reason) VALUES (?, ?, ?, ?);`, [username, req.session.user, type.toUpperCase(), reason], function (error, results, fields) {
+            if (error) {
+              throw error;
+            } else {
+              res.redirect('/panel');
+            };
+        });
       });
     } else {
       rcon.send(`${type} ${username} ${reason}`).then(result => {
-        console.log(result)
-        res.redirect('/panel');
+        console.log(result);
+
+        database.query(`INSERT INTO punishments (punisheduser, punisher, punishtype, reason) VALUES (?, ?, ?, ?);`, [username, req.session.user, type.toUpperCase(), reason], function (error, results, fields) {
+            if (error) {
+              throw error;
+            } else {
+              res.redirect('/panel');
+            };
+        });
       });
     }
   };
