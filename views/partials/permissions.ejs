@@ -11,22 +11,46 @@
     <tr>
       <td>account.create</td>
       <td><small>Create an account.</small></td>
-      <td><input type="checkbox" class="form-check-input" name="accountcreate"></td>
+      <td>
+        <select name="accountcreate" required="required" class="custom-select">
+          <option value="" selected disabled>Status</option>
+          <option value="GRANT">GRANT</option>
+          <option value="DENY">DENY</option>
+        </select>
+      </td>
     </tr>
     <tr>
       <td>account.delete</td>
       <td><small>Delete an account.</small></td>
-      <td><input type="checkbox" class="form-check-input" name="accountdelete"></td>
+      <td>
+        <select name="accountdelete" class="custom-select" required="required">
+          <option value="" selected disabled>Status</option>
+          <option value="GRANT">GRANT</option>
+          <option value="DENY">DENY</option>
+        </select>
+      </td>
     </tr>
     <tr>
       <td>account.disable</td>
       <td><small>Disable an account.</small></td>
-      <td><input type="checkbox" class="form-check-input" name="accountdisable"></td>
+      <td>
+        <select name="accountdisable" class="custom-select" required="required">
+          <option value="" selected disabled>Status</option>
+          <option value="GRANT">GRANT</option>
+          <option value="DENY">DENY</option>
+        </select>
+      </td>
     </tr>
     <tr>
       <td>account.edit</td>
       <td><small>Edit an account.</small></td>
-      <td><input type="checkbox" class="form-check-input" name="accountedit"></td>
+      <td>
+        <select name="accountedit" class="custom-select" required="true">
+          <option value="" selected disabled>Status</option>
+          <option value="GRANT">GRANT</option>
+          <option value="DENY">DENY</option>
+        </select>
+      </td>
     </tr>
   </tbody>
 </table>
@@ -44,27 +68,57 @@
     <tr>
       <td>punishment.warn</td>
       <td><small>Warn a player.</small></td>
-      <td><input type="checkbox" class="form-check-input" name="punishmentwarn"></td>
+      <td>
+        <select name="punishmentwarn" class="custom-select" required="required">
+          <option value="" selected disabled>Status</option>
+          <option value="GRANT">GRANT</option>
+          <option value="DENY">DENY</option>
+        </select>
+      </td>
     </tr>
     <tr>
       <td>punishment.kick</td>
       <td><small>Kick a player.</small></td>
-      <td><input type="checkbox" class="form-check-input" name="punishmentkick"></td>
+      <td>
+        <select name="punishmentkick" class="custom-select" required="required">
+          <option value="" selected disabled>Status</option>
+          <option value="GRANT">GRANT</option>
+          <option value="DENY">DENY</option>
+        </select>
+      </td>
     </tr>
     <tr>
       <td>punishment.ban</td>
       <td><small>Ban a player.</small></td>
-      <td><input type="checkbox" class="form-check-input" name="punishmentban"></td>
+      <td>
+        <select name="punishmentban" class="custom-select" required="required">
+          <option value="" selected disabled>Status</option>
+          <option value="GRANT">GRANT</option>
+          <option value="DENY">DENY</option>
+        </select>
+      </td>
     </tr>
     <!-- <tr>
       <td>punishment.banip</td>
       <td><small>Ban a player and their IP.</small></td>
-      <td><input type="checkbox" class="form-check-input" name="punishmentbanip"></td>
+      <td>
+        <select name="punishmentbanip" class="custom-select" required="required">
+          <option value="" selected disabled>Status</option>
+          <option value="GRANT">GRANT</option>
+          <option value="DENY">DENY</option>
+        </select>
+      </td>
     </tr> -->
     <tr>
       <td>punishment.pardon</td>
       <td><small>Pardon a player.</small></td>
-      <td><input type="checkbox" class="form-check-input" name="punishmentpardon"></td>
+      <td>
+        <select name="punishmentpardon" class="custom-select" required="required">
+          <option value="" selected disabled>Status</option>
+          <option value="GRANT">GRANT</option>
+          <option value="DENY">DENY</option>
+        </select>
+      </td>
     </tr>
   </tbody>
 </table>
@@ -82,22 +136,46 @@
     <tr>
       <td>server.broadcast</td>
       <td><small>Broadcast messages as RCON to the Server.</small></td>
-      <td><input type="checkbox" class="form-check-input" name="serverbroadcast"></td>
+      <td>
+        <select name="serverbroadcast" class="custom-select" required="required">
+          <option value="" selected disabled>Status</option>
+          <option value="GRANT">GRANT</option>
+          <option value="DENY">DENY</option>
+        </select>
+      </td>
     </tr>
     <tr>
       <td>server.time</td>
       <td><small>Change time in server.</small></td>
-      <td><input type="checkbox" class="form-check-input" name="servertime"></td>
+      <td>
+        <select name="servertime" class="custom-select" required="required">
+          <option value="" selected disabled>Status</option>
+          <option value="GRANT">GRANT</option>
+          <option value="DENY">DENY</option>
+        </select>
+      </td>
     </tr>
     <!-- <tr>
       <td>server.gamerule</td>
       <td><small>Ban a player.</small></td>
-      <td><input type="checkbox" class="form-check-input" name="servergamerule"></td>
+      <td>
+        <select name="servergamerule" class="custom-select" required="required">
+          <option value="" selected disabled>Status</option>
+          <option value="GRANT">GRANT</option>
+          <option value="DENY">DENY</option>
+        </select>
+      </td>
     </tr>
     <tr>
       <td>server.command</td>
       <td><small>Allow user to run any command in console window.</small></td>
-      <td><input type="checkbox" class="form-check-input" name="servercommands"></td>
+      <td>
+        <select name="servercommand" class="custom-select" required="required">
+          <option value="" selected disabled>Status</option>
+          <option value="GRANT">GRANT</option>
+          <option value="DENY">DENY</option>
+        </select>
+      </td>
     </tr> -->
   </tbody>
 </table>

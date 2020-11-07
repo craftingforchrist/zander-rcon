@@ -42,8 +42,8 @@
             </td>
           </tr>
         </tbody>
-      </table> -->
-      <hr>
+      </table>
+      <hr>-->
 
       <!-- <div>
         <h5>Legend</h5>
@@ -57,8 +57,8 @@
             <td>Clear Inventory</td>
           </tr>
         </table>
-      </div> -->
-      <hr>
+      </div>
+      <hr> -->
     </div>
 
     <!-- Punishment -->
@@ -73,16 +73,26 @@
           <label for="punishmenttype">Type of Punishment</label>
           <select class="form-control" name="punishmenttype" required>
             <option disabled selected>Select</option>
-            <option value="warn">Warn</option>
-            <option value="kick">Kick</option>
-            <option value="ban">Ban</option>
-            <option value="ban-ip" disabled>Ban Player and IP Address</option>
-            <option value="pardon">Pardon</option>
+            <% if (accountpermissiondata.punishmentwarn == 'GRANT') { %>
+              <option value="warn">Warn</option>
+            <% } %>
+            <% if (accountpermissiondata.punishmentkick == 'GRANT') { %>
+              <option value="kick">Kick</option>
+            <% } %>
+            <% if (accountpermissiondata.punishmentban == 'GRANT') { %>
+              <option value="ban">Ban</option>
+            <% } %>
+            <% if (accountpermissiondata.punishmentbanip == 'GRANT') { %>
+              <option value="ban-ip" disabled>Ban Player and IP Address</option>
+            <% } %>
+            <% if (accountpermissiondata.punishmentpardon == 'GRANT') { %>
+              <option value="pardon">Pardon</option>
+            <% } %>
           </select>
         </div>
         <div class="form-group">
           <label for="punishmentreason">Reason</label>
-          <textarea class="form-control" name="punishmentreason" rows="2"></textarea>
+          <input type="text" name="punishmentreason" class="form-control">
         </div>
         <button type="submit" class="btn btn-warning">Punish</button>
       </form>
@@ -91,6 +101,7 @@
 
     <!-- Broadcast -->
     <div class="col-sm">
+      <% if (accountpermissiondata.serverbroadcast == 'GRANT') { %>
       <h3>Broadcast</h3>
       <form method="post" action="/rcon/broadcast">
         <div class="form-group">
@@ -99,24 +110,27 @@
         </div>
         <button type="submit" class="btn btn-primary btn-sm">Broadcast</button>
       </form>
+      <% } %>
+      <% if (accountpermissiondata.servertime == 'GRANT') { %>
       <hr>
 
       <!-- Time -->
-      <h3>Time</h3>
-      <div class="btn-group" role="group">
-        <form method="post" action="/rcon/time/day">
-          <button type="submit" class="btn btn-secondary">Day</button>
-        </form>
-        <form method="post" action="/rcon/time/midnight">
-          <button type="submit" class="btn btn-secondary">Midnight</button>
-        </form>
-        <form method="post" action="/rcon/time/night">
-          <button type="submit" class="btn btn-secondary">Night</button>
-        </form>
-        <form method="post" action="/rcon/time/noon">
-          <button type="submit" class="btn btn-secondary">Noon</button>
-        </form>
-      </div>
+        <h3>Time</h3>
+        <div class="btn-group" role="group">
+          <form method="post" action="/rcon/time/day">
+            <button type="submit" class="btn btn-secondary">Day</button>
+          </form>
+          <form method="post" action="/rcon/time/midnight">
+            <button type="submit" class="btn btn-secondary">Midnight</button>
+          </form>
+          <form method="post" action="/rcon/time/night">
+            <button type="submit" class="btn btn-secondary">Night</button>
+          </form>
+          <form method="post" action="/rcon/time/noon">
+            <button type="submit" class="btn btn-secondary">Noon</button>
+          </form>
+        </div>
+      <% } %>
     </div>
   </div>
   <hr>

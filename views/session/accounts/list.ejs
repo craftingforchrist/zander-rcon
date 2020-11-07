@@ -34,9 +34,11 @@
     <%- include("../../partials/micros/errormsg.ejs") %>
   <% } %>
 
-  <div class="">
-    <a href="/panel/accounts/add"><button type="submit" class="btn btn-success">Create Account</button></a>
-  </div>
+  <% if (accountpermissiondata.accountcreate == 'GRANT') { %>
+    <div class="">
+      <a href="/panel/accounts/add"><button type="submit" class="btn btn-success">Create Account</button></a>
+    </div>
+  <% } %>
   <br>
 
   <table class="table">
@@ -60,16 +62,19 @@
             </div>
           </td> -->
           <td style="max-width:10px;">
+            <% if (accountpermissiondata.accountedit == 'GRANT') { %>
             <div class="btn-group" role="group" aria-label="accountactiongroup">
-              <!-- <form action="/panel/accounts/edit" method="post">
-                <input type="hidden" name="action" value="edit">
-                <input type="hidden" name="id" value="<%= data.id %>">
-                <button type="submit" class="btn btn-warning btn-sm">Edit</button>
-              </form> -->
-              <form action="/panel/accounts/delete" method="post">
-                <input type="hidden" name="id" value="<%= data.id %>">
-                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-              </form>
+                <form action="/panel/accounts/edit" method="post">
+                  <input type="hidden" name="id" value="<%= data.id %>">
+                  <button type="submit" class="btn btn-warning btn-sm">Edit</button>
+                </form>
+              <% } %>
+              <% if (accountpermissiondata.accountdelete == 'GRANT') { %>
+                <form action="/panel/accounts/delete" method="post">
+                  <input type="hidden" name="id" value="<%= data.id %>">
+                  <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+              <% } %>
             </div>
           </td>
         </tr>

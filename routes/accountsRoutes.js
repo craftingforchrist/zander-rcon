@@ -8,10 +8,10 @@ const token = randomToken(16);
 const Discord = require('discord.js');
 const client = new Discord.Client({ disableEveryone: true });
 
-//
-// Accounts Administration Page.
-//
 module.exports = (client) => {
+  //
+  // Accounts Administration Page.
+  //
   router.get('/panel/accounts', (req, res, next) => {
     if (!req.session.user) {
       res.render('session/login', {
@@ -20,14 +20,15 @@ module.exports = (client) => {
         "loginfailed": false
       });
     } else {
-      database.query(`SELECT * FROM accountdata;`, function (error, results, fields) {
+      database.query(`SELECT * FROM accountdata; SELECT * FROM accountspermissions where accountid=(SELECT id from accountdata where username='${req.session.user}');`, function (error, results, fields) {
         if (error) {
           throw error;
         } else {
           res.render('session/accounts/list', {
             "pagetitle": "Accounts",
             "pagedescription": "List of all Accounts.",
-            objdata: results
+            objdata: results[0],
+            accountpermissiondata: results[1]
           });
         };
       });
@@ -35,7 +36,7 @@ module.exports = (client) => {
   });
 
   //
-  // Delte Account and remove from Database.
+  // Delete Account and remove from Database.
   //
   router.post('/panel/accounts/delete', function (req, res, next) {
     if (!req.session.user) {
@@ -98,8 +99,6 @@ module.exports = (client) => {
           let discordid = req.body.discordid;
           let sql = `INSERT INTO accountdata (username, password, discordid) VALUES (?, ?, ?);`
           database.query (sql, [`${username}`, `${token}`, `${discordid}`], async function (err, results) {
-            console.log(results);
-
             //
             // Discord Notification Send
             //
@@ -113,18 +112,41 @@ module.exports = (client) => {
               });
             console.log(`[CONSOLE] [DISCORD] Sent ${username}'s password for panel access via direct messages.`);
 
-            // TODO: Need to add account permissions.
-
-            // let sql = `INSERT INTO accountspermissions (username, accountcreate, accountdelete, accountdisable, accountedit, punishmentwarn, punishmentkick, punishmentban, punishmentpardon, serverbroadcast, servertime) VALUES ((SELECT id from accountdata where username='?'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`
-            // database.query (sql, [`${username}`, `${req.body.accountcreate}`, `${req.body.accountdelete}`, `${req.body.accountdisable}`, `${req.body.accountedit}`, `${req.body.punishmentwarn}`, `${req.body.punishmentkick}`, `${req.body.punishmentban}`, `${req.body.punishmentpardon}`, `${req.body.serverbroadcast}`, `${req.body.servertime}`], async function (err, results) {
-            //   console.log(results);
-            // });
+            let sql = `INSERT INTO accountspermissions (accountid, accountcreate, accountdelete, accountdisable, accountedit, punishmentwarn, punishmentkick, punishmentban, punishmentpardon, serverbroadcast, servertime) VALUES ((SELECT id from accountdata where username=?), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`
+            database.query (sql, [`${req.body.username}`, `${req.body.accountcreate}`, `${req.body.accountdelete}`, `${req.body.accountdisable}`, `${req.body.accountedit}`, `${req.body.punishmentwarn}`, `${req.body.punishmentkick}`, `${req.body.punishmentban}`, `${req.body.punishmentpardon}`, `${req.body.serverbroadcast}`, `${req.body.servertime}`], async function (err, results) {
+              console.log(`[CONSOLE] Applied account permissions to ${username}`);
+            });
 
             res.redirect('/panel/accounts');
           });
         }
       });
     }
+  });
+
+  //
+  // Accounts Edit Page.
+  //
+  router.post('/panel/accounts/edit', (req, res, next) => {
+    if (!req.session.user) {
+      res.render('session/login', {
+        "pagetitle": "Login",
+        "pagedescription": "To be able to have full functionality, please login.",
+        "loginfailed": false
+      });
+    } else {
+      database.query(`SELECT * FROM accountdata WHERE id=${req.body.id}; SELECT * FROM accountspermissions where accountid=(SELECT id from accountdata where id='${req.body.id}');`, function (error, results, fields) {
+        if (error) {
+          throw error;
+        } else {
+          res.render('session/accounts/edit', {
+            "pagetitle": "Accounts",
+            "pagedescription": "List of all Accounts.",
+            objdata: results[0]
+          });
+        };
+      });
+    };
   });
 
   return router;

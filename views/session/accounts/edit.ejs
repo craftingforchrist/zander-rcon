@@ -1,0 +1,41 @@
+<%- include("../../partials/header.ejs") %>
+<%- include("../../partials/navigation.ejs") %>
+
+<div class="container">
+  <div class="jumbotron">
+    <div class="container">
+      <h1 class="display-3">Accounts</h1>
+      <p>Create an account</p>
+    </div>
+  </div>
+
+  <% if (successalert == true) { %>
+    <%- include("../../partials/micros/successmsg.ejs") %>
+  <% } %>
+
+  <form action="/panel/accounts/update" method="post">
+    <h1>Basics</h1>
+    <hr>
+    <div class="form-row">
+      <div class="col">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" name="username" value="<%= objdata[0].username %>" required>
+        <small class="form-text text-muted">The players in game name.</small>
+      </div>
+      <div class="col">
+        <label for="discordid">Discord ID</label>
+        <input type="text" class="form-control" name="discordid" aria-describedby="discordidhelp" required value="<%= objdata[0].discordid %>">
+        <small class="form-text text-muted">This is used to send the panel password to the user.</small>
+      </div>
+    </div>
+    <br><br>
+
+    <h1>Permissions</h1>
+    <hr>
+    <%- include("../../partials/permissions.ejs") %>
+
+    <button type="submit" class="btn btn-warning">Edit Account</button>
+  </form>
+</div>
+
+<%- include("../../partials/footer.ejs") %>
